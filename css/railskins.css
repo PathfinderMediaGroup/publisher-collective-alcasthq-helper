@@ -1,0 +1,19 @@
+#nn_skin_l, #nn_skin_r {
+    position: fixed;
+    top: 185px;
+    left: 50%;
+    margin-left: -1012px;
+    display: block;
+    border: red 1px solid;
+    width: 301px;
+    height: 900px;
+}
+#nn_skin_r {
+    width: 300px;
+    margin-left: 712px;
+}
+
+#nn_lb1 {
+    text-align: center;
+    margin: 0 auto;
+}
