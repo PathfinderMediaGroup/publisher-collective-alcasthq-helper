@@ -86,9 +86,9 @@ class NetworkN_AdHelper
     public function add_filters()
     {
         // Add required scripts to all pages
-        if (isset($this->shortcodes[$this->domain])) {
-            foreach ($this->shortcodes[$this->domain] as $shortcode_name => $function_name) {
-                add_shortcode($shortcode_name, [$this, $function_name], 20);
+        if (isset($this->filters[$this->domain])) {
+            foreach ($this->filters[$this->domain] as $filter_name => $function_name) {
+                add_filter($filter_name, [$this, $function_name], 20);
             }
         }
     }
@@ -97,9 +97,9 @@ class NetworkN_AdHelper
     public function add_shortcodes()
     {
         // Add required scripts to all pages
-        if (isset($this->filters[$this->domain])) {
-            foreach ($this->filters[$this->domain] as $filter_name => $function_name) {
-                add_filter($filter_name, [$this, $function_name], 20);
+        if (isset($this->shortcodes[$this->domain])) {
+            foreach ($this->shortcodes[$this->domain] as $shortcode_name => $function_name) {
+                add_shortcode($shortcode_name, [$this, $function_name], 20);
             }
         }
     }
