@@ -22,6 +22,11 @@ class NetworkN_AdHelper
 
     public function __construct()
     {
+        // We don't need to do anything in the admin area or post previews
+        if( is_preview() || is_admin() ){
+            return;
+        }
+
         // Get the domain name
         $this->domain = $_SERVER['HTTP_HOST'];
 
