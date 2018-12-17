@@ -23,7 +23,7 @@ class NetworkN_AdHelper
     public function __construct()
     {
         // We don't need to do anything in the admin area or post previews
-        if( is_preview() || is_admin() ){
+        if( isset($_GET['preview']) || is_preview() || is_admin() ){
             return;
         }
 
