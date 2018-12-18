@@ -140,7 +140,8 @@ class NetworkN_AdHelper
 
     public function insert_leaderboard_container()
     {
-        if (is_archive() || is_single()) {
+        if (!is_front_page() && (is_archive() || is_single() || is_page())) {
+            // if (is_archive() || is_single()) {
             include 'views/leaderboard.php';
         }
     }
