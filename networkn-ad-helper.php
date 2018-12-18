@@ -23,7 +23,7 @@ class NetworkN_AdHelper
     public function __construct()
     {
         // We don't need to do anything in the admin area or post previews
-        if( isset($_GET['preview']) || is_preview() || is_admin() ){
+        if (isset($_GET['preview']) || is_preview() || is_admin()) {
             return;
         }
 
@@ -116,6 +116,9 @@ class NetworkN_AdHelper
     {
         $this->insert_cmp_head_code();
         $this->insert_gtm_head_code();
+        if (is_front_page()) {
+            $this->insert_springserve_code();
+        }
     }
 
     /**
@@ -152,13 +155,18 @@ class NetworkN_AdHelper
         include 'views/googletagmanager-body.php';
     }
 
+    public function insert_springserve_code()
+    {
+        include 'views/springserve-script.php';
+    }
+
     /**
      * Add rail skin container <div>'s
      */
     public function insert_rail_skins_code()
     {
         // Do not display on home-page, front-page or 404 pages.
-        if (is_archive() || is_single()) {
+        if (!is_front_page() && (is_archive() || is_single() || is_page())) {
             include 'views/railskins.php';
         }
     }
@@ -173,11 +181,11 @@ class NetworkN_AdHelper
     public function inject_mpu_slots_into_post_content($content)
     {
         if (is_singular('post')) {
-            if( FALSE === strpos($content, 'nn_mobile_mpu1') ) {
+            if (false === strpos($content, 'nn_mobile_mpu1')) {
                 $content = $this->dom_insert_adslot_after($content, 'nn_mobile_mpu1', 'nn-mpu--mobile', 'h2[2]', 4);
             }
 
-            if( FALSE === strpos($content, 'nn_mobile_mpu2') ) {
+            if (false === strpos($content, 'nn_mobile_mpu2')) {
                 $content = $this->dom_insert_adslot_after($content, 'nn_mobile_mpu2', 'nn-mpu--mobile', 'h2[4]', 10);
             }
             return $content;
