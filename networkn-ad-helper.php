@@ -3,7 +3,7 @@
 Plugin Name:  Network-N Advertisement Helper
 Plugin URI:   https://www.network-n.com/
 Description:  Network-N Ads scripts plugin for WordPress sites
-Version:      20181016
+Version:      20190102
 Author:       NETWORK N
 Author URI:   https://www.network-n.com/
 Text Domain:  networkn
@@ -68,14 +68,12 @@ class NetworkN_AdHelper
         // Run the actions
         $this->add_filters();
 
-        // $this->shortcodes = [
-        //     'alcasthq.com' => [
-        //         'mpu_ad' => 'override_mpu_location'
-        //     ]
-        // ];
-        // [nnad id=nn_mobile_mpu1]
-        // [nnad id=nn_mobile_mpu2]
-        // $this->add_shortcodes();
+        $this->shortcodes = [
+            'alcasthq.com' => [
+                // 'mpu_ad' => 'override_mpu_location'
+            ]
+        ];
+        $this->add_shortcodes();
     }
 
     public function add_actions()
@@ -141,7 +139,6 @@ class NetworkN_AdHelper
     public function insert_leaderboard_container()
     {
         if (!is_front_page() && (is_archive() || is_single() || is_page())) {
-            // if (is_archive() || is_single()) {
             include 'views/leaderboard.php';
         }
     }
