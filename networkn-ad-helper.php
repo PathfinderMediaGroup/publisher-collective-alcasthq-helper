@@ -221,13 +221,15 @@ class NetworkN_AdHelper
         // $placeholder->setAttribute('src', 'https://placehold.it/320x250/?text='.$adslot_id);
         // $element->appendChild( $placeholder );
 
-        $domPosition->parentNode->insertBefore($element, $domPosition->nextSibling);
+        if ($domPosition->parentNode !== null && $domPosition->nextSibling !== null) {
+            $domPosition->parentNode->insertBefore($element, $domPosition->nextSibling);
 
-        // Get all the inner body elements
-        $content = '';
-        $body = $dom->getElementsByTagName('body')->item(0);
-        foreach ($body->childNodes as $childNode) {
-            $content .= $dom->saveHTML($childNode);
+            // Get all the inner body elements
+            $content = '';
+            $body = $dom->getElementsByTagName('body')->item(0);
+            foreach ($body->childNodes as $childNode) {
+                $content .= $dom->saveHTML($childNode);
+            }
         }
         return $content;
     }
