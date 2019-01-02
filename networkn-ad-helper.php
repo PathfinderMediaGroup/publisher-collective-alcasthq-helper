@@ -183,7 +183,7 @@ class NetworkN_AdHelper
                 $content = $this->dom_insert_adslot_after($content, 'nn_mobile_mpu1', 'nn-mpu--mobile', 'h2[2]', 4);
             }
 
-            if (false === strpos($content, 'nn_mobile_mpu2')) {
+            if (false === strpos($content, 'nn_mobile_mpu2') && false !== strpos($content, 'nn_mobile_mpu1')) {
                 $content = $this->dom_insert_adslot_after($content, 'nn_mobile_mpu2', 'nn-mpu--mobile', 'h2[4]', 10);
             }
             return $content;
@@ -203,7 +203,7 @@ class NetworkN_AdHelper
         if ($domPosition->length < 1) {
             // No heading found... reverting to Nth paragraph
             $domPosition = $xpath->query('//p');
-            if (!$this->mpu_slot_at_bottom && $domPosition->length < $pPos) {
+            if (!$this->mpu_slot_at_bottom && $domPosition->length <= $pPos) {
                 $domPosition = $domPosition[$domPosition->length-1];
                 $this->mpu_slot_at_bottom = true;
             } else {
