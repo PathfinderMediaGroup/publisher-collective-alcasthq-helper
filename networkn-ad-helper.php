@@ -44,7 +44,7 @@ class NetworkN_AdHelper
                     'link'  => 'https://alcasthq.com/',
                     'title' => 'Alcast HQ',
                 ],
-                'gtm_id' => 'GTM-T9VVBKT',
+                'gtm_id' => 'GTM-T9VVBKT'
             ]
         ];
 
@@ -112,11 +112,20 @@ class NetworkN_AdHelper
      */
     public function insert_head_code()
     {
+        $this->insert_sss_code();
         $this->insert_cmp_head_code();
         $this->insert_gtm_head_code();
         if (is_front_page()) {
             $this->insert_springserve_code();
         }
+    }
+
+    /**
+     * Generic method for inserting Single Script Solution code
+     */
+    public function insert_sss_code()
+    {
+        include 'views/single-script-solution.php';
     }
 
     /**
