@@ -52,7 +52,7 @@ class NetworkN_AdHelper
         $this->actions = [
             'alcasthq.com' => [
                 'wp_head' => 'insert_head_code',
-                'wp_footer' => 'insert_rail_skins_code',
+                'wp_footer' => 'insert_rail_skins_container',
                 'avada_before_body_content' => 'insert_body_code',
                 'avada_before_main_container' => 'insert_leaderboard_container',
             ]
@@ -145,13 +145,6 @@ class NetworkN_AdHelper
         include 'views/cmp/'.$template;
     }
 
-    public function insert_leaderboard_container()
-    {
-        if (!is_front_page() && (is_archive() || is_single() || is_page())) {
-            include 'views/leaderboard.php';
-        }
-    }
-
     public function insert_gtm_head_code()
     {
         include 'views/googletagmanager.php';
@@ -167,13 +160,23 @@ class NetworkN_AdHelper
         include 'views/springserve-script.php';
     }
 
+
+    /**
+     * Add leaderboard container <div>
+     */
+    public function insert_leaderboard_container()
+    {
+        if (is_front_page() || is_search() || is_archive() || is_single() || is_page()) {
+            include 'views/leaderboard.php';
+        }
+    }
+
     /**
      * Add rail skin container <div>'s
      */
-    public function insert_rail_skins_code()
+    public function insert_rail_skins_container()
     {
-        // Do not display on home-page, front-page or 404 pages.
-        if (!is_front_page() && (is_archive() || is_single() || is_page())) {
+        if (is_front_page() || is_search() || is_archive() || is_single() || is_page()) {
             include 'views/railskins.php';
         }
     }
