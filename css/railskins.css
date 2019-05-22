@@ -7,6 +7,7 @@
     border: red 1px solid;
     width: 301px;
     height: 900px;
+    z-index: 10;
 }
 #nn_skin_r {
     width: 300px;
