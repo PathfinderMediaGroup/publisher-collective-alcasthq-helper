@@ -40,7 +40,7 @@ class NetworkN_AdHelper
             'alcasthq.com' => [
                 'cmp'       => [
                     'template' => 'default.php',
-                    'logo'  => 'https://alcasthq.com/wp-content/uploads/2018/10/80x80_alcastlogo1.png',
+                    'logo'  => 'https://alcasthq.com/wp-content/uploads/2019/06/72xfavicon.png',
                     'link'  => 'https://alcasthq.com/',
                     'title' => 'Alcast HQ',
                 ],
