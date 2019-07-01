@@ -3,7 +3,7 @@
 Plugin Name:  Network-N Advertisement Helper
 Plugin URI:   https://www.network-n.com/
 Description:  Network-N Ads scripts plugin for WordPress sites
-Version:      20190326
+Version:      20190701
 Author:       NETWORK N
 Author URI:   https://www.network-n.com/
 Text Domain:  networkn
