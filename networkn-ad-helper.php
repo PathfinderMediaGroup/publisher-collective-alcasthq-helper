@@ -3,7 +3,7 @@
 Plugin Name:  Network-N Advertisement Helper
 Plugin URI:   https://www.network-n.com/
 Description:  Network-N Ads scripts plugin for WordPress sites
-Version:      20190326
+Version:      20190701
 Author:       NETWORK N
 Author URI:   https://www.network-n.com/
 Text Domain:  networkn
@@ -118,9 +118,6 @@ class NetworkN_AdHelper
         $this->insert_comscore_code();
         $this->insert_sss_code();
         $this->insert_gtm_head_code();
-        if (is_front_page()) {
-            $this->insert_springserve_code();
-        }
     }
 
     /**
@@ -161,11 +158,6 @@ class NetworkN_AdHelper
     public function insert_gtm_body_code()
     {
         include 'views/googletagmanager-body.php';
-    }
-
-    public function insert_springserve_code()
-    {
-        include 'views/springserve-script.php';
     }
 
 
