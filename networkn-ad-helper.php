@@ -112,8 +112,9 @@ class NetworkN_AdHelper
      */
     public function insert_head_code()
     {
-        $this->insert_sss_code();
         $this->insert_cmp_head_code();
+        $this->insert_comscore_code();
+        $this->insert_sss_code();
         $this->insert_gtm_head_code();
         if (is_front_page()) {
             $this->insert_springserve_code();
@@ -148,6 +149,11 @@ class NetworkN_AdHelper
     public function insert_gtm_head_code()
     {
         include 'views/googletagmanager.php';
+    }
+
+    public function insert_comscore_code()
+    {
+        include 'views/comscore.php';
     }
 
     public function insert_gtm_body_code()
