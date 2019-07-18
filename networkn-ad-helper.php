@@ -213,9 +213,10 @@ class NetworkN_AdHelper
 
     public function alcast_append_celtra_sticky_header_class($safe_text='', $text='')
     {
-        if ($text === 'fusion-header-wrapper') {
-            return 'fusion-header-wrapper celtra-reveal-header-sticky';
+        if ($safe_text === 'fusion-header-wrapper') {
+            $safe_text = 'fusion-header-wrapper celtra-reveal-header-sticky';
         }
+        return $safe_text;
     }
 
     public function dom_insert_adslot_after($content, $adslot_id, $class='', $hPos='h2[2]', $pPos=4)
