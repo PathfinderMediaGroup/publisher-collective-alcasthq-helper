@@ -53,6 +53,7 @@ class NetworkN_AdHelper
             'alcasthq.com' => [
                 'wp_head' => 'insert_head_code',
                 'wp_footer' => 'insert_rail_skins_container',
+                'wp_footer' => 'insert_bfa_container',
                 'avada_before_body_content' => 'insert_body_code',
                 'avada_before_main_container' => 'insert_leaderboard_container',
             ]
@@ -62,7 +63,8 @@ class NetworkN_AdHelper
 
         $this->filters = [
             'alcasthq.com' => [
-                'the_content' => 'inject_mpu_slots_into_post_content'
+                'the_content' => 'inject_mpu_slots_into_post_content',
+                'attribute_escape' => 'alcast_append_celtra_sticky_header_class',
             ]
         ];
         // Run the actions
@@ -187,6 +189,13 @@ class NetworkN_AdHelper
         }
     }
 
+    public function insert_bfa_container()
+    {
+        if (is_front_page() || is_search() || is_archive() || is_single() || is_page()) {
+            include 'views/bfa.php';
+        }
+    }
+
     public function override_mpu_location($atts)
     {
         $atts = shortcode_atts(['id'=>'','class'=>'nn-mpu--mobile'], $atts);
@@ -208,6 +217,13 @@ class NetworkN_AdHelper
         }
 
         return $content;
+    }
+
+    public function alcast_append_celtra_sticky_header_class($safe_text='', $text='')
+    {
+        if ($text === 'fusion-header-wrapper') {
+            return 'fusion-header-wrapper celtra-reveal-header-sticky';
+        }
     }
 
     public function dom_insert_adslot_after($content, $adslot_id, $class='', $hPos='h2[2]', $pPos=4)
