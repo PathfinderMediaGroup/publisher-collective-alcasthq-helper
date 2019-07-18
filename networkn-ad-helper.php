@@ -52,8 +52,7 @@ class NetworkN_AdHelper
         $this->actions = [
             'alcasthq.com' => [
                 'wp_head' => 'insert_head_code',
-                'wp_footer' => 'insert_rail_skins_container',
-                'wp_footer' => 'insert_bfa_container',
+                'wp_footer' => 'insert_rail_skins_and_bfa_containers',
                 'avada_before_body_content' => 'insert_body_code',
                 'avada_before_main_container' => 'insert_leaderboard_container',
             ]
@@ -169,6 +168,12 @@ class NetworkN_AdHelper
         if (is_front_page() || is_search() || is_archive() || is_single() || is_page()) {
             include 'views/leaderboard.php';
         }
+    }
+
+    public function insert_rail_skins_and_bfa_containers()
+    {
+        $this->insert_rail_skins_container();
+        $this->insert_bfa_container();
     }
 
     /**
