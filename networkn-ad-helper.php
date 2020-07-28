@@ -113,10 +113,10 @@ class NetworkN_AdHelper
      */
     public function insert_head_code()
     {
+        $this->insert_preconnect_code();
         $this->insert_cmp_head_code();
-        $this->insert_comscore_code();
         $this->insert_sss_code();
-        $this->insert_gtm_head_code();
+        // $this->insert_gtm_head_code();
     }
 
     /**
@@ -127,12 +127,18 @@ class NetworkN_AdHelper
         include 'views/single-script-solution.php';
     }
 
+	public function insert_facebook_pixel_code()
+	{
+		include 'views/facebook-pixel.php';
+	}
+
     /**
      * Generic method for inserting body scripts
      */
     public function insert_body_code()
     {
-        $this->insert_gtm_body_code();
+		$this->insert_facebook_pixel_code();
+        // $this->insert_gtm_body_code();
     }
 
     /**
@@ -149,9 +155,9 @@ class NetworkN_AdHelper
         include 'views/googletagmanager.php';
     }
 
-    public function insert_comscore_code()
+    public function insert_preconnect_code()
     {
-        include 'views/comscore.php';
+        include 'views/preconnect.php';
     }
 
     public function insert_gtm_body_code()
