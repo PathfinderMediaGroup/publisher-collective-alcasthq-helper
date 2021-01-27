@@ -13,6 +13,7 @@ class NetworkN_AdHelper
 {
     private const MPU_CONTENT_SHORTCODE = 'nnmpu';
 
+    private $testpage = 'eso-2018-recap';
     private $domain;
     private $configs;
     private $actions;
@@ -116,6 +117,8 @@ class NetworkN_AdHelper
         $this->insert_preconnect_code();
         $this->insert_cmp_head_code();
         $this->insert_sss_code();
+
+        printf('<!-- uri: %s -->', $_REQUEST['REQUEST_URI']);
         // $this->insert_gtm_head_code();
     }
 
