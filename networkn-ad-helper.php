@@ -13,8 +13,9 @@ class NetworkN_AdHelper
 {
     private const MPU_CONTENT_SHORTCODE = 'nnmpu';
 
-    private $testpage = 'eso-2018-recap';
     private $domain;
+    private $testpage = 'eso-2018-recap';
+    private $isDemoPage = false;
     private $configs;
     private $actions;
     private $filters;
@@ -27,6 +28,9 @@ class NetworkN_AdHelper
         if (isset($_GET['preview']) || is_preview() || is_admin()) {
             return;
         }
+
+        global $wp;
+        $this->isDemoPage = $wp->request === $this->testpage;
 
         // Get the domain name
         $this->domain = $_SERVER['HTTP_HOST'];
@@ -114,11 +118,15 @@ class NetworkN_AdHelper
      */
     public function insert_head_code()
     {
+        printf('<meta name="nn_scriptmode" content="%s">', $this->isDemoPage ? 'atlas' : 'sss');
+
         $this->insert_preconnect_code();
-        $this->insert_cmp_head_code();
-        $this->insert_sss_code();
-        global $wp;
-        printf('<meta name="nnuri" content="%s">', $wp->request);
+        if($this->isDemoPage) {
+            $this->insert_atlas_code();
+        } else {
+            $this->insert_cmp_head_code();
+            $this->insert_sss_code();
+        }
         // $this->insert_gtm_head_code();
     }
 
@@ -128,6 +136,11 @@ class NetworkN_AdHelper
     public function insert_sss_code()
     {
         include 'views/single-script-solution.php';
+    }
+
+    public function insert_atlas_code()
+    {
+        include 'views/atlas-script.php';
     }
 
 	public function insert_facebook_pixel_code()
@@ -140,8 +153,10 @@ class NetworkN_AdHelper
      */
     public function insert_body_code()
     {
-		$this->insert_facebook_pixel_code();
-        // $this->insert_gtm_body_code();
+        if(!$this->isDemoPage) {
+    		$this->insert_facebook_pixel_code();
+            // $this->insert_gtm_body_code();
+        }
     }
 
     /**
