@@ -117,7 +117,8 @@ class NetworkN_AdHelper
         $this->insert_preconnect_code();
         $this->insert_cmp_head_code();
         $this->insert_sss_code();
-        printf('<meta name="nnuri" content="%s">', $_REQUEST['REQUEST_URI']);
+        global $wp;
+        printf('<meta name="nnuri" content="%s">', $wp->request);
         // $this->insert_gtm_head_code();
     }
 
