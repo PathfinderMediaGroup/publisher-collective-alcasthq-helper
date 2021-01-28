@@ -15,7 +15,6 @@ class NetworkN_AdHelper
 
     private $domain;
     private $testpage = 'eso-2018-recap';
-    private $isDemoPage = false;
     private $configs;
     private $actions;
     private $filters;
@@ -28,9 +27,6 @@ class NetworkN_AdHelper
         if (isset($_GET['preview']) || is_preview() || is_admin()) {
             return;
         }
-
-        global $wp;
-        $this->isDemoPage = $wp->request === $this->testpage;
 
         // Get the domain name
         $this->domain = $_SERVER['HTTP_HOST'];
@@ -82,6 +78,12 @@ class NetworkN_AdHelper
         $this->add_shortcodes();
     }
 
+    public function isDemoPage()
+    {
+        global $wp;
+        return $wp->request === $this->testpage;
+    }
+
     public function add_actions()
     {
         // Add required scripts to all pages
@@ -118,10 +120,10 @@ class NetworkN_AdHelper
      */
     public function insert_head_code()
     {
-        printf('<meta name="nn_scriptmode" content="%s">', $this->isDemoPage ? 'atlas' : 'sss');
+        printf('<meta name="nn_scriptmode" content="%s">', $this->isDemoPage() ? 'atlas' : 'sss');
 
         $this->insert_preconnect_code();
-        if($this->isDemoPage) {
+        if($this->isDemoPage()) {
             $this->insert_atlas_code();
         } else {
             $this->insert_cmp_head_code();
@@ -153,7 +155,7 @@ class NetworkN_AdHelper
      */
     public function insert_body_code()
     {
-        if(!$this->isDemoPage) {
+        if(!$this->isDemoPage()) {
     		$this->insert_facebook_pixel_code();
             // $this->insert_gtm_body_code();
         }
