@@ -138,7 +138,7 @@ class NetworkN_AdHelper
         if($this->isDemoPage())
         {
             $custom_css_path = sprintf('%scss/%s/custom.min.css', plugin_dir_url( __FILE__ ), $this->domain);
-            wp_enqueue_style('nn-custom-css', $custom_css_path);
+            wp_enqueue_style('nn-custom', $custom_css_path);
         }
     }
 
