@@ -52,6 +52,7 @@ class NetworkN_AdHelper
         // Add site actions
         $this->actions = [
             'alcasthq.com' => [
+                'wp_enqueue_scripts' => 'enqueue_custom_css',
                 'wp_head' => 'insert_head_code',
                 'wp_footer' => 'insert_rail_skins_and_bfa_containers',
                 'avada_before_body_content' => 'insert_body_code',
@@ -130,6 +131,15 @@ class NetworkN_AdHelper
             $this->insert_sss_code();
         }
         // $this->insert_gtm_head_code();
+    }
+
+    public function enqueue_custom_css()
+    {
+        if($this->isDemoPage())
+        {
+            $custom_css_path = sprintf('%scss/%s/custom.min.css', plugin_dir_url( __FILE__ ), $this->domain);
+            wp_enqueue_style('nn-custom-css', $custom_css_path);
+        }
     }
 
     /**
