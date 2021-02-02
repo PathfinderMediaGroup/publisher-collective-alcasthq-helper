@@ -14,7 +14,6 @@ class NetworkN_AdHelper
     private const MPU_CONTENT_SHORTCODE = 'nnmpu';
 
     private $domain;
-    private $testpage = 'eso-2018-recap';
     private $configs;
     private $actions;
     private $filters;
@@ -79,10 +78,9 @@ class NetworkN_AdHelper
         $this->add_shortcodes();
     }
 
-    public function isDemoPage()
+    public function atlasEnabled()
     {
-        global $wp;
-        return $wp->request === $this->testpage;
+        return $this->domain === 'alcasthq.com';
     }
 
     public function add_actions()
@@ -105,7 +103,6 @@ class NetworkN_AdHelper
         }
     }
 
-
     public function add_shortcodes()
     {
         // Add required scripts to all pages
@@ -121,21 +118,23 @@ class NetworkN_AdHelper
      */
     public function insert_head_code()
     {
-        printf('<meta name="nn_scriptmode" content="%s">', $this->isDemoPage() ? 'atlas' : 'sss');
+        printf('<meta name="nn_scriptmode" content="%s">', $this->atlasEnabled() ? 'atlas' : 'sss');
 
         $this->insert_preconnect_code();
-        if($this->isDemoPage()) {
+        if($this->atlasEnabled()) {
             $this->insert_atlas_code();
         } else {
             $this->insert_cmp_head_code();
             $this->insert_sss_code();
         }
-        // $this->insert_gtm_head_code();
     }
 
+    /**
+     * Queue custom CSS (not currently bundled with Atlas scripts)
+     */
     public function enqueue_custom_css()
     {
-        if($this->isDemoPage())
+        if($this->atlasEnabled())
         {
             $custom_css_path = sprintf('%scss/%s/custom.min.css', plugin_dir_url( __FILE__ ), $this->domain);
             wp_enqueue_style('nn-custom', $custom_css_path);
@@ -143,31 +142,37 @@ class NetworkN_AdHelper
     }
 
     /**
-     * Generic method for inserting Single Script Solution code
+     * Insert Single Script Solution code
      */
     public function insert_sss_code()
     {
         include 'views/single-script-solution.php';
     }
 
+    /**
+     * Insert Atlas code
+     */
     public function insert_atlas_code()
     {
         include 'views/atlas-script.php';
     }
 
+    /**
+     * Add Facebook Pixel script tag
+     * @return [type] [description]
+     */
 	public function insert_facebook_pixel_code()
 	{
 		include 'views/facebook-pixel.php';
 	}
 
     /**
-     * Generic method for inserting body scripts
+     * Insert body scripts
      */
     public function insert_body_code()
     {
-        if(!$this->isDemoPage()) {
+        if(!$this->atlasEnabled()) {
     		$this->insert_facebook_pixel_code();
-            // $this->insert_gtm_body_code();
         }
     }
 
