@@ -64,7 +64,7 @@ class NetworkN_AdHelper
         $this->filters = [
             'alcasthq.com' => [
                 'the_content' => 'inject_mpu_slots_into_post_content',
-                'attribute_escape' => 'alcast_append_celtra_sticky_header_class',
+                // 'attribute_escape' => 'alcast_append_celtra_sticky_header_class',
             ]
         ];
         // Run the actions
