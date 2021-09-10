@@ -263,7 +263,7 @@ class NetworkN_AdHelper
     {
         if (is_singular('post')) {
             if (false === strpos($content, 'nn_player')) {
-                $content = $this->dom_insert_adslot_after($content, 'nn_player', '', '[h2]20', 3);
+                $content = $this->dom_insert_adslot_after($content, 'nn_player', '', '', 3);
 			}
             return $content;
         }
@@ -286,19 +286,28 @@ class NetworkN_AdHelper
         $dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
         $xpath = new DomXPath($dom);
 
-        $domPosition = $xpath->query('//'.$hPos);
-        if ($domPosition->length < 1) {
-            // No heading found... reverting to Nth paragraph
-            $domPosition = $xpath->query('//p');
-            if (!$this->mpu_slot_at_bottom && $domPosition->length <= $pPos) {
-                $domPosition = $domPosition[$domPosition->length-1];
-                $this->mpu_slot_at_bottom = true;
-            } else {
-                $domPosition = $domPosition[$pPos];
-            }
-        } else {
-            $domPosition = $domPosition[0];
-        }
+		if ($hPos !== '') {
+			$domPosition = $xpath->query('//'.$hPos);
+			if ($domPosition->length < 1) {
+				// No heading found... reverting to Nth paragraph
+				$domPosition = $xpath->query('//p');
+				if ($this->mpu_slot_at_bottom === false && $domPosition->length <= $pPos) {
+					$domPosition = $domPosition[$domPosition->length-1];
+					$this->mpu_slot_at_bottom = true;
+				} else {
+					$domPosition = $domPosition[$pPos];
+				}
+			} else {
+				$domPosition = $domPosition[0];
+			}
+		} else {
+			$domPosition = $xpath->query('//p');
+			if ($pPos >= $domPosition->length) { // $pPos should not be higher than no. of paragraphs
+				$domPosition = $domPosition[$domPosition->length-1];
+			} else {
+				$domPosition = $domPosition[$pPos];
+			}
+		}
         $element = $dom->createElement('div');
         $element->setAttribute('id', $adslot_id);
         $element->setAttribute('class', $class);
