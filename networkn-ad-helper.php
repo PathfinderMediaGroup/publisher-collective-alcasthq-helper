@@ -99,7 +99,7 @@ class NetworkN_AdHelper
         // Add required scripts to all pages
         if (isset($this->filters[$this->domain])) {
             foreach ($this->filters[$this->domain] as $filter_name => $function_name) {
-                add_filter($filter_name, [$this, $function_name], 20);
+                add_filter($filter_name, [$this, $function_name], 900);
             }
         }
     }
@@ -302,11 +302,11 @@ class NetworkN_AdHelper
 			}
 		} else {
 			$domPosition = $xpath->query('//p');
-			if ($pPos >= $domPosition->length) { // $pPos should not be higher than no. of paragraphs
-				$domPosition = $domPosition[$domPosition->length-1];
-			} else {
-				$domPosition = $domPosition[$pPos];
-			}
+
+			// $pPos should not be higher than no. of paragraphs
+			$pPos = ($pPos >= $domPosition->length) ? $domPosition->length-1 : $pPos;
+			
+			$domPosition = $domPosition[$pPos];
 		}
         $element = $dom->createElement('div');
         $element->setAttribute('id', $adslot_id);
