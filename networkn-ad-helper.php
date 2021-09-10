@@ -3,7 +3,7 @@
 Plugin Name:  Network-N Advertisement Helper
 Plugin URI:   https://www.network-n.com/
 Description:  Network-N Ads scripts plugin for WordPress sites
-Version:      20200921
+Version:      20210910
 Author:       NETWORK N
 Author URI:   https://www.network-n.com/
 Text Domain:  networkn
@@ -64,6 +64,7 @@ class NetworkN_AdHelper
         $this->filters = [
             'alcasthq.com' => [
                 'the_content' => 'inject_mpu_slots_into_post_content',
+                'the_content' => 'inject_player_into_post_content',
                 // 'attribute_escape' => 'alcast_append_celtra_sticky_header_class',
             ]
         ];
@@ -251,6 +252,19 @@ class NetworkN_AdHelper
             if (false === strpos($content, 'nn_mobile_mpu2') && false !== strpos($content, 'nn_mobile_mpu1')) {
                 $content = $this->dom_insert_adslot_after($content, 'nn_mobile_mpu2', 'nn-mpu--mobile', 'h2[4]', 10);
             }
+            return $content;
+        }
+
+        return $content;
+    }
+
+    // Filter the_content and add an nn_player unit
+    public function inject_player_into_post_content($content)
+    {
+        if (is_singular('post')) {
+            if (false === strpos($content, 'nn_player')) {
+                $content = $this->dom_insert_adslot_after($content, 'nn_player', '', '[h2]20', 3);
+			}
             return $content;
         }
 
