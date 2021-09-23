@@ -16,16 +16,16 @@
 	w.addEventListener('DOMContentLoaded', function(){
 		placeholder({
 			id: 'nn_mobile_mpu1',
-			after: d.querySelector('div.post-content > p:nth-child(2)')
+			after: d.querySelector('div.post-content > *:nth-child(2)')
 		});
 		placeholder({
 			id: 'nn_mobile_mpu2',
-			before: d.querySelector('div.post-content > h2:nth-child(3n)')
+			before: d.querySelector('div.post-content > *:nth-child(10)')
 		});		
 		placeholder({
 			id: 'nn_player',
 			style: 'text-align:center; display:block; width:100%; clear:both; padding:15px 0;',
-			before: d.querySelector('div.post-content > p:nth-child(6)')
+			before: d.querySelector('div.post-content > *:nth-child(6)')
 		});
 	});
 })(window, document);
