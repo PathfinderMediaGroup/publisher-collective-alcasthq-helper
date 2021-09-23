@@ -10,7 +10,6 @@
 		if (obj.before) obj.before.parentNode.insertBefore(newDiv, obj.before);
 		if (obj.after) obj.after.parentNode.insertBefore(newDiv, obj.after.nextSibling);
 
-		console.log('test', obj);
 		obj.el = newDiv;
 		return obj; // Return the same obj, but with the new element attached
 	}
