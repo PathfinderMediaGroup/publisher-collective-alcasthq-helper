@@ -99,7 +99,7 @@ class NetworkN_AdHelper
         // Add required scripts to all pages
         if (isset($this->filters[$this->domain])) {
             foreach ($this->filters[$this->domain] as $filter_name => $function_name) {
-                add_filter($filter_name, [$this, $function_name], 900);
+                add_filter($filter_name, [$this, $function_name], 20);
             }
         }
     }
