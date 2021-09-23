@@ -286,12 +286,12 @@ class NetworkN_AdHelper
         $dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
         $xpath = new DomXPath($dom);
 
-		if ($hPos !== '') {
+		if (!empty($hPos)) {
 			$domPosition = $xpath->query('//'.$hPos);
 			if ($domPosition->length < 1) {
 				// No heading found... reverting to Nth paragraph
 				$domPosition = $xpath->query('//p');
-				if ($this->mpu_slot_at_bottom === false && $domPosition->length <= $pPos) {
+				if (!$this->mpu_slot_at_bottom && $domPosition->length <= $pPos) {
 					$domPosition = $domPosition[$domPosition->length-1];
 					$this->mpu_slot_at_bottom = true;
 				} else {
