@@ -53,7 +53,6 @@ class NetworkN_AdHelper
             'alcasthq.com' => [
                 'wp_enqueue_scripts' => 'enqueue_custom_css',
                 'wp_head' => 'insert_head_code',
-                'wp_head' => 'insert_placeholders',
                 'wp_footer' => 'insert_rail_skins_and_bfa_containers',
                 'avada_before_body_content' => 'insert_body_code',
                 'avada_before_main_container' => 'insert_leaderboard_container',
@@ -129,6 +128,7 @@ class NetworkN_AdHelper
             $this->insert_cmp_head_code();
             $this->insert_sss_code();
         }
+		$this->insert_placeholders();
     }
 
     /**
