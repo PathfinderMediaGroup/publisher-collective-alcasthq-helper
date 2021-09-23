@@ -53,6 +53,7 @@ class NetworkN_AdHelper
             'alcasthq.com' => [
                 'wp_enqueue_scripts' => 'enqueue_custom_css',
                 'wp_head' => 'insert_head_code',
+                'wp_head' => 'insert_placeholders',
                 'wp_footer' => 'insert_rail_skins_and_bfa_containers',
                 'avada_before_body_content' => 'insert_body_code',
                 'avada_before_main_container' => 'insert_leaderboard_container',
@@ -63,8 +64,8 @@ class NetworkN_AdHelper
 
         $this->filters = [
             'alcasthq.com' => [
-                'the_content' => 'inject_mpu_slots_into_post_content',
-                'the_content' => 'inject_player_into_post_content',
+                // 'the_content' => 'inject_mpu_slots_into_post_content',
+                // 'the_content' => 'inject_player_into_post_content',
                 // 'attribute_escape' => 'alcast_append_celtra_sticky_header_class',
             ]
         ];
@@ -189,6 +190,11 @@ class NetworkN_AdHelper
     public function insert_gtm_head_code()
     {
         include 'views/googletagmanager.php';
+    }
+
+    public function insert_placeholders()
+    {
+        include 'views/placeholders.php';
     }
 
     public function insert_preconnect_code()
