@@ -221,7 +221,7 @@ class NetworkN_AdHelper
     public function insert_rail_skins_and_bfa_containers()
     {
         $this->insert_rail_skins_container();
-        $this->insert_bfa_container();
+        // $this->insert_bfa_container();
     }
 
     /**
