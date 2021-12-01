@@ -119,6 +119,10 @@ class NetworkN_AdHelper
      */
     public function insert_head_code()
     {
+        if ($this->userIsPatron(wp_get_current_user())) {
+            return;
+        }
+
         printf('<meta name="nn_scriptmode" content="%s">', $this->atlasEnabled() ? 'atlas' : 'sss');
 
         $this->insert_preconnect_code();
@@ -334,6 +338,25 @@ class NetworkN_AdHelper
             }
         }
         return $content;
+    }
+
+    private function userIsPatron($user)
+    {
+        if ($user && class_exists('Patreon_Wordpress') && method_exists('Patreon_Wordpress', 'getPatreonUser')) {
+            $patreonUser = Patreon_Wordpress::getPatreonUser($user);
+            if (isset($patreonUser['included'])) {
+                foreach ($patreonUser['included'] as $pledge) {
+                    if (
+                        isset($pledge['relationships']['currently_entitled_tiers']['data'])
+                        && count($pledge['relationships']['currently_entitled_tiers']['data']) > 0
+                    ) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
 
