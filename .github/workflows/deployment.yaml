@@ -8,11 +8,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
 
-      - name: PHP Syntax Checker (Lint) 7.4
-        uses: StephaneBour/actions-php-lint@7.4
+      - name: PHP Syntax Checker (Lint) 8.0
+        uses: StephaneBour/actions-php-lint@8.0
 
       - name: Sync files
         uses: milanmk/actions-file-deployer@1.9
