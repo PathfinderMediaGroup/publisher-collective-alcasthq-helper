@@ -53,6 +53,7 @@ body.celtra-loaded header.fusion-header-wrapper {
 
 @media only screen and (max-width: 991px) {
 	#nn_skinr {
-	width: 0px!important;
-	margin-left: 0px!important;
+		width: 0px!important;
+		margin-left: 0px!important;
+	}
 }
