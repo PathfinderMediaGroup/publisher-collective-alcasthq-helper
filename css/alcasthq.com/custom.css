@@ -50,3 +50,9 @@ body.celtra-loaded header.fusion-header-wrapper {
 		text-align: center;
 	}
 }
+
+@media only screen and (max-width: 991px) {
+	#nn_skinr {
+	width: 0px!important;
+	margin-left: 0px!important;
+}
