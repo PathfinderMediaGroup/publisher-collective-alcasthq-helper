@@ -138,6 +138,14 @@ class NetworkN_AdHelper
         if ($this->atlasEnabled()) {
             $custom_css_path = sprintf('%scss/%s/custom.min.css', plugin_dir_url(__FILE__), $this->domain);
             wp_enqueue_style('nn-custom', $custom_css_path);
+
+            wp_enqueue_script('alcast_main_js',
+                plugins_url('/js/alcasthqmain.js', __FILE__),
+                [], false, true);
+
+            wp_localize_script("alcast_main_js", "autoplaceBodyAdsVars", [
+                'isHomePage' => (is_home() || is_front_page())
+            ]);
         }
     }
 
